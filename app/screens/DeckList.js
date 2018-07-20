@@ -1,13 +1,19 @@
+// React Library Imports
+import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {Alert, FlatList, Text, TouchableOpacity, View} from 'react-native';
 import realm from '../realm';
 
+// eslint-disable-next-line no-undef
 const uuidv1 = require('uuid/v1');
 
 // Helpers
 import onNavigatorEvent from '../lib/onNavigatorEvent';
 import CONSTANTS from '../constants';
 
+/**
+ * DeckList
+ */
 class DeckList extends Component {
     static navigatorButtons = {
         leftButtons: [
@@ -53,10 +59,14 @@ class DeckList extends Component {
         this.props.navigator.setOnNavigatorEvent(onNavigatorEvent.bind(this));
     }
 
+    /**
+     * Method that runs before the render() has launched
+     */
     componentWillUnmount() {
         this.data_source.removeListener(this.on_change);
     }
 
+    // TODO: Cleanup
     onChange = async (name, changes) => {
         this.setState({processing: true});
         await this.forceUpdate();
@@ -82,6 +92,7 @@ class DeckList extends Component {
 
     /**
      * Open a deck single view with the passed object
+     * @param {object} deck
      * @private
      */
     _navigateToDeck(deck) {
@@ -95,7 +106,7 @@ class DeckList extends Component {
     }
 
     /**
-     * Render the viewitem.name
+     * Render the view
      * @return {object} Return JSX Object to render
      */
     render() {
@@ -111,5 +122,9 @@ class DeckList extends Component {
         );
     }
 }
+
+DeckList.propTypes = {
+    navigator: PropTypes.object.isRequired,
+};
 
 export default DeckList;

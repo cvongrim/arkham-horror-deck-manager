@@ -29,7 +29,6 @@ export default function onNavigatorEvent(event) {
         }
         case 'DeepLink': {
             const parts = event.link.split('/'); // Link parts
-            const payload = event.payload; // (optional) The payload
 
             switch (parts[0]) {
                 case CONSTANTS.screens.deckCreate.link: {
