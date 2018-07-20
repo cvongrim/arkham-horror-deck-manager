@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Button, TextInput, View} from 'react-native';
-import {connect} from 'react-redux';
 import realm from '../realm';
 
 const uuidv1 = require('uuid/v1');
@@ -9,7 +8,7 @@ class DeckCreate extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {text: "Enter New Test Data"};
+        this.state = {text: 'Enter New Test Data'};
 
         this._addNewDeck = this._addNewDeck.bind(this);
     }
@@ -17,10 +16,10 @@ class DeckCreate extends Component {
     _addNewDeck(text) {
         try {
             realm.write(() => {
-                realm.create('Deck', {id: uuidv1(), name: text, creationDate: new Date() }, true);
+                realm.create('Deck', {id: uuidv1(), name: text, creationDate: new Date()}, true);
             });
         } catch (e) {
-            console.log("Error on creation");
+            console.log('Error on creation');
         }
     }
 
@@ -44,4 +43,4 @@ class DeckCreate extends Component {
 }
 
 
-export default connect()(DeckCreate);
+export default DeckCreate;

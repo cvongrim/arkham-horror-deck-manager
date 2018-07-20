@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ActivityIndicator, Alert, FlatList, Text, View} from 'react-native';
+import {Alert, FlatList, Text, TouchableOpacity, View} from 'react-native';
 import realm from '../realm';
 
 const uuidv1 = require('uuid/v1');
@@ -9,7 +9,6 @@ import onNavigatorEvent from '../lib/onNavigatorEvent';
 import CONSTANTS from '../constants';
 
 class DeckList extends Component {
-
     static navigatorButtons = {
         leftButtons: [
             {
@@ -27,6 +26,10 @@ class DeckList extends Component {
         ],
     };
 
+    /**
+     * Constructor
+     * @param {object} props
+     */
     constructor(props) {
         super(props);
 
@@ -60,16 +63,50 @@ class DeckList extends Component {
         this.setState({processing: false});
     };
 
+    /**
+     * Render the row in the resource feed
+     * @param {object} item
+     * @return {*}
+     * @private
+     */
+    _renderItem(item) {
+        return (
+            <TouchableOpacity
+                onPress={() => this._navigateToDeck(item)}
+                accessibilityLabel={'Open to Media' + item.name}
+            >
+                <Text>{item.name}</Text>
+            </TouchableOpacity>
+        );
+    }
+
+    /**
+     * Open a deck single view with the passed object
+     * @private
+     */
+    _navigateToDeck(deck) {
+        this.props.navigator.push({
+            screen: CONSTANTS.screens.deckSingle.screen,
+            title: deck.name,
+            passProps: {
+                deck: deck,
+            },
+        });
+    }
+
+    /**
+     * Render the viewitem.name
+     * @return {object} Return JSX Object to render
+     */
     render() {
         return (
             <View style={{flex: 1, padding: 20}}>
-                {!this.state.processing ?
-                    <FlatList
-                        data={this.data_source}
-                        renderItem={({item}) => <Text>{item.name}</Text>}
-                        keyExtractor={(item) => item.id.toString()}
-                    /> :
-                    <ActivityIndicator size="small" color="#00ff00"/>}
+                <FlatList
+                    data={this.data_source}
+                    renderItem={({item}) => this._renderItem(item)}
+                    refreshing={this.state.processing}
+                    keyExtractor={(item) => item.id.toString()}
+                />
             </View>
         );
     }

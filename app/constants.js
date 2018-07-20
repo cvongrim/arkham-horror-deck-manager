@@ -20,5 +20,9 @@ module.exports = {
                 screen: 'screen.DeckList',
                 title: 'Deck List',
             },
+            deckSingle: {
+                link: 'deckSingle',
+                screen: 'screen.DeckSingle',
+            },
         },
 };
