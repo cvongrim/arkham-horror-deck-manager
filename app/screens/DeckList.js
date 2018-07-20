@@ -4,13 +4,24 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as exampleActions from '../actions/example';
 
+// Helpers
+import onNavigatorEvent from '../lib/onNavigatorEvent';
+import CONSTANTS from '../constants';
+
 class FirstTabScreen extends Component {
 
     static navigatorButtons = {
-        rightButtons: [
+        leftButtons: [
             {
                 title: 'Menu',
                 id: 'menu',
+                showAsAction: 'always'
+            }
+        ],
+        rightButtons: [
+            {
+                title: 'Add Deck',
+                id: CONSTANTS.screens.deckCreate.link,
                 showAsAction: 'always'
             }
         ]
@@ -26,46 +37,11 @@ class FirstTabScreen extends Component {
         this.state = {text: "Enter New Test Data"};
 
         this._updateExampleReduxData = this._updateExampleReduxData.bind(this);
-        this.props.navigator.setOnNavigatorEvent(this._onNavigatorEvent.bind(this));
+        this.props.navigator.setOnNavigatorEvent(onNavigatorEvent.bind(this));
     }
 
     _updateExampleReduxData(text) {
         this.props.actions.setExampleData(text);
-    }
-
-    /**
-     *
-     * This may need to be moved to it's own class so it can be used it more than one screen
-     *
-     * **/
-    _onNavigatorEvent(event) {
-        switch (event.type) {
-            case 'NavBarButtonPress':
-                if (event.id === 'menu') { // this is the same id field from the static navigatorButtons definition
-                    this.props.navigator.toggleDrawer({
-                        side: 'left', // the side of the drawer since you can have two, 'left' / 'right'
-                    });
-                }
-                break;
-            case 'DeepLink':
-                const parts = event.link.split('/'); // Link parts
-                const payload = event.payload; // (optional) The payload
-
-                switch (parts[0]) {
-                    case 'logout':
-                        this.props.navigator.resetTo({
-                            screen: 'example.LoginScreen'
-                        });
-                        break;
-                    case 'secondScreen':
-                        this.props.navigator.push({
-                            screen: 'example.SecondScreen',
-                            title: 'Passed ID: ' + parts[1]
-                        });
-                        break;
-                }
-                break;
-        }
     }
 
     render() {

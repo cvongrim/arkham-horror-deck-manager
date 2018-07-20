@@ -8,6 +8,9 @@ import configureStore from './store/configureStore';
 
 const store = configureStore();
 
+// Constants and Styles
+import colors from './styles/colors';
+
 registerScreens(store, Provider);
 registerScreenVisibilityListener();
 
@@ -31,15 +34,21 @@ class App extends Component {
                         fixedWidth: 500, // a fixed width you want your left drawer to have (optional)
                     },
                     style: { // ( iOS only )
-                        drawerShadow: true, // optional, add this if you want a side menu drawer shadow
-                        contentOverlayColor: 'rgba(0,0,0,0.25)', // optional, add this if you want a overlay color when drawer is open
-                        leftDrawerWidth: 50, // optional, add this if you want a define left drawer width (50=percent)
-                        rightDrawerWidth: 50 // optional, add this if you want a define right drawer width (50=percent)
+                        drawerShadow: true,
+                        contentOverlayColor: 'rgba(0,0,0,0.25)',
                     },
-                    type: 'TheSideBar', // optional, iOS only, types: 'TheSideBar', 'MMDrawer' default: 'MMDrawer'
-                    animationType: 'door', //optional, iOS only, for MMDrawer: 'door', 'parallax', 'slide', 'slide-and-scale'
-                    // for TheSideBar: 'airbnb', 'facebook', 'luvocracy','wunder-list'
-                    disableOpenGesture: true // optional, can the drawer, both right and left, be opened with a swipe instead of button
+                    type: 'MMDrawer',
+                    animationType: 'slide',
+                    disableOpenGesture: true,
+                },
+                appStyle: {
+                    drawUnderStatusBar: true,
+                    navBarButtonColor: colors.black,
+                    navBarHeight: 50, // Optional, set the navBar height in pixels.
+                    orientation: 'portrait',
+                    screenBackgroundColor: colors.white,
+                    statusBarColor: colors.white,
+                    statusBarTextColorScheme: 'dark',
                 },
             });
         })
