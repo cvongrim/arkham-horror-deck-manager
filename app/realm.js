@@ -2,12 +2,16 @@
 
 import Realm from 'realm';
 
-class Deck extends Realm.Object {}
+class Deck extends Realm.Object {
+}
+
 Deck.schema = {
     name: 'Deck',
+    primaryKey: 'id',
     properties: {
-        name: 'string',
         creationDate: 'date',
+        name: 'string',
+        id: 'string',
     },
 };
 

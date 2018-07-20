@@ -1,80 +1,78 @@
 import React, {Component} from 'react';
-import {Button, Text, TextInput, View} from 'react-native';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import * as exampleActions from '../actions/example';
+import {ActivityIndicator, Alert, FlatList, Text, View} from 'react-native';
+import realm from '../realm';
+
+const uuidv1 = require('uuid/v1');
 
 // Helpers
 import onNavigatorEvent from '../lib/onNavigatorEvent';
 import CONSTANTS from '../constants';
 
-class FirstTabScreen extends Component {
+class DeckList extends Component {
 
     static navigatorButtons = {
         leftButtons: [
             {
                 title: 'Menu',
                 id: 'menu',
-                showAsAction: 'always'
-            }
+                showAsAction: 'always',
+            },
         ],
         rightButtons: [
             {
                 title: 'Add Deck',
                 id: CONSTANTS.screens.deckCreate.link,
-                showAsAction: 'always'
-            }
-        ]
-    };
-
-    static navigatorStyle = {
-        navBarHidden: false
+                showAsAction: 'always',
+            },
+        ],
     };
 
     constructor(props) {
         super(props);
 
-        this.state = {text: "Enter New Test Data"};
+        this.state = {
+            processing: true,
+        };
 
-        this._updateExampleReduxData = this._updateExampleReduxData.bind(this);
+        this.data_source = realm.objects('Deck').sorted('creationDate');
+        this.data_source.addListener(this.onChange);
+
+        if (this.data_source.length < 1) {
+            try {
+                realm.write(() => {
+                    realm.create('Deck', {id: uuidv1(), name: 'Sample Deck', creationDate: new Date()}, true);
+                });
+            } catch (e) {
+                Alert.alert('Error retrieving decks.');
+            }
+        }
+
         this.props.navigator.setOnNavigatorEvent(onNavigatorEvent.bind(this));
     }
 
-    _updateExampleReduxData(text) {
-        this.props.actions.setExampleData(text);
+    componentWillUnmount() {
+        this.data_source.removeListener(this.on_change);
     }
 
+    onChange = async (name, changes) => {
+        this.setState({processing: true});
+        await this.forceUpdate();
+        this.setState({processing: false});
+    };
+
     render() {
-        const {example} = this.props;
         return (
             <View style={{flex: 1, padding: 20}}>
-                <Text>Props Data</Text>
-                <Text>{example.details}</Text>
-                <TextInput
-                    style={{borderWidth: 1}}
-                    onChangeText={(text) => this.setState({text})}
-                    value={this.state.text}
-                />
-                <Button
-                    onPress={() => this._updateExampleReduxData(this.state.text)}
-                    title="Update State"
-                    color="#841584"
-                    accessibilityLabel="Update State"
-                />
+                {!this.state.processing ?
+                    <FlatList
+                        data={this.data_source}
+                        renderItem={({item}) => <Text>{item.name}</Text>}
+                        keyExtractor={(item) => item.id.toString()}
+                    /> :
+                    <ActivityIndicator size="small" color="#00ff00"/>}
             </View>
         );
     }
 }
 
-function mapStateToProps(state) {
-    const {example} = state;
-    return {example}
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(exampleActions, dispatch)
-    };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(FirstTabScreen);
+export default DeckList;
