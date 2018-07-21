@@ -27,6 +27,7 @@
 		62031518A07340A994EEE998 /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58311F5BB51F4833AC6822F9 /* libReactNativeNavigation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		9F9B779298C441B39FB81D15 /* libRealmReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 25915F56F83A41009A07AAD4 /* libRealmReact.a */; };
+		A285ABFC0DE643C6802D2D9F /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F44FAD4643C34D26A67A7A72 /* libRNFetchBlob.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		DCA31538C41C499393D72141 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E28B109AD880467DAB72956E /* libz.tbd */; };
 /* End PBXBuildFile section */
@@ -298,6 +299,13 @@
 			remoteGlobalIDString = F60690131CA2766F0003FB26;
 			remoteInfo = RealmReact;
 		};
+		D6C6C34E2102C2D20067738A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 588C417507E34F6DA2D9CE8A /* RNFetchBlob.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A15C300E1CD25C330074CB35;
+			remoteInfo = RNFetchBlob;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -323,6 +331,7 @@
 		25915F56F83A41009A07AAD4 /* libRealmReact.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRealmReact.a; sourceTree = "<group>"; };
 		549A5E5A16394FBAB710335B /* RealmReact.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RealmReact.xcodeproj; path = "../node_modules/realm/react-native/ios/RealmReact.xcodeproj"; sourceTree = "<group>"; };
 		58311F5BB51F4833AC6822F9 /* libReactNativeNavigation.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeNavigation.a; sourceTree = "<group>"; };
+		588C417507E34F6DA2D9CE8A /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFetchBlob.xcodeproj; path = "../node_modules/react-native-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; };
 		59A7C513A79E4E6BB5E68D68 /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -330,6 +339,7 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		E28B109AD880467DAB72956E /* libz.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		F44FAD4643C34D26A67A7A72 /* libRNFetchBlob.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFetchBlob.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -362,6 +372,7 @@
 				9F9B779298C441B39FB81D15 /* libRealmReact.a in Frameworks */,
 				3AF6AECE44754B929435971D /* libc++.tbd in Frameworks */,
 				DCA31538C41C499393D72141 /* libz.tbd in Frameworks */,
+				A285ABFC0DE643C6802D2D9F /* libRNFetchBlob.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,6 +537,7 @@
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				59A7C513A79E4E6BB5E68D68 /* ReactNativeNavigation.xcodeproj */,
 				549A5E5A16394FBAB710335B /* RealmReact.xcodeproj */,
+				588C417507E34F6DA2D9CE8A /* RNFetchBlob.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -577,6 +589,7 @@
 			children = (
 				58311F5BB51F4833AC6822F9 /* libReactNativeNavigation.a */,
 				25915F56F83A41009A07AAD4 /* libRealmReact.a */,
+				F44FAD4643C34D26A67A7A72 /* libRNFetchBlob.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -593,6 +606,14 @@
 			isa = PBXGroup;
 			children = (
 				D6C6C301210250FF0067738A /* libRealmReact.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D6C6C34B2102C2D20067738A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D6C6C34F2102C2D20067738A /* libRNFetchBlob.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -721,6 +742,10 @@
 				{
 					ProductGroup = D6C6C2FD210250FE0067738A /* Products */;
 					ProjectRef = 549A5E5A16394FBAB710335B /* RealmReact.xcodeproj */;
+				},
+				{
+					ProductGroup = D6C6C34B2102C2D20067738A /* Products */;
+					ProjectRef = 588C417507E34F6DA2D9CE8A /* RNFetchBlob.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -991,6 +1016,13 @@
 			remoteRef = D6C6C300210250FF0067738A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		D6C6C34F2102C2D20067738A /* libRNFetchBlob.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNFetchBlob.a;
+			remoteRef = D6C6C34E2102C2D20067738A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1082,12 +1114,14 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
 					"$(SRCROOT)/../node_modules/realm/src/**",
+					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 				);
 				INFOPLIST_FILE = AHDMTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -1109,12 +1143,14 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
 					"$(SRCROOT)/../node_modules/realm/src/**",
+					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 				);
 				INFOPLIST_FILE = AHDMTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -1138,6 +1174,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
 					"$(SRCROOT)/../node_modules/realm/src/**",
+					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 				);
 				INFOPLIST_FILE = AHDM/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1162,6 +1199,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
 					"$(SRCROOT)/../node_modules/realm/src/**",
+					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 				);
 				INFOPLIST_FILE = AHDM/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

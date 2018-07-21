@@ -3,6 +3,7 @@ package com.ltap;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.RNFetchBlob.RNFetchBlobPackage;
 import io.realm.react.RealmReactPackage;
 import com.reactnativenavigation.NavigationApplication;
 import com.facebook.react.ReactNativeHost;

@@ -5,6 +5,8 @@ import realm from '../realm';
 // eslint-disable-next-line no-undef
 const uuidv1 = require('uuid/v1');
 
+import CardList from '../components/CardList';
+
 /**
  * DeckCreate
  */
@@ -18,7 +20,6 @@ class DeckCreate extends Component {
         super(props);
 
         this.state = {text: 'Enter New Test Data'};
-
         this._addNewDeck = this._addNewDeck.bind(this);
     }
 
@@ -44,6 +45,7 @@ class DeckCreate extends Component {
     render() {
         return (
             <View style={{padding: 20}}>
+                <CardList />
                 <TextInput
                     style={{borderWidth: 1}}
                     onChangeText={(text) => this.setState({text})}
