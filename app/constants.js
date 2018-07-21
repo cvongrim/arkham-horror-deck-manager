@@ -7,7 +7,23 @@ const BASE_URL = 'https://arkhamdb.com/'; // Production
 module.exports = {
     API_URL: BASE_URL + 'api/',
     BASE_URL: BASE_URL,
-    release: true, // Set to True when release the app to an app / play store.
+    CARD_CLASSES: ['Guardian, Mystic, Rogue, Seeker, Survivor'],
+    CARD_TYPES: [
+        {
+            type_code: 'asset',
+            type_name: 'Asset',
+        },
+        {
+            type_code: 'event',
+            type_name: 'Event',
+        },
+        {
+            type_code: 'skill',
+            type_name: 'Skill',
+        },
+    ],
+    // CARD_TYPES: ['Asset, Event, Skill'],
+    RELEASE: true, // Set to True when release the app to an app / play store.
     // This is the content used to connect a screen with a link
     screens:
         {

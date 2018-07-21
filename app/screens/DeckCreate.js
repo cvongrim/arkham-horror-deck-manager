@@ -65,6 +65,7 @@ class DeckCreate extends Component {
     render() {
         return (
             <View style={STYLES_GENERAL.container}>
+                <CardList />
                 <TextField
                     label='Deck Name'
                     onChangeText={(text) => this.setState({text})}

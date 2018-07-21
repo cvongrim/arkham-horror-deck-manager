@@ -1,4 +1,4 @@
-package com.ltap;
+package com.ahdm;
 
 import com.facebook.react.ReactActivity;
 import com.reactnativenavigation.controllers.SplashActivity;
