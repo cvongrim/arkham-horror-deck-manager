@@ -1,11 +1,17 @@
 import React, {Component} from 'react';
 import {Alert, Button, TextInput, View} from 'react-native';
+import { TextField } from 'react-native-material-textfield';
 import realm from '../realm';
 
 // eslint-disable-next-line no-undef
 const uuidv1 = require('uuid/v1');
 
+// Styles
+import STYLES_GENERAL from '../styles/general';
+
 import CardList from '../components/CardList';
+import CONSTANTS from '../constants';
+import PropTypes from "prop-types";
 
 /**
  * DeckCreate
@@ -19,7 +25,7 @@ class DeckCreate extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {text: 'Enter New Test Data'};
+        this.state = {text: ''};
         this._addNewDeck = this._addNewDeck.bind(this);
     }
 
@@ -29,13 +35,26 @@ class DeckCreate extends Component {
      * @private
      */
     _addNewDeck(text) {
+        // TODO: Move?
         try {
             realm.write(() => {
                 realm.create('Deck', {id: uuidv1(), name: text, creationDate: new Date()}, true);
             });
+            this._returnToDeckList();
         } catch (e) {
             Alert.alert('Error on creation');
         }
+    }
+
+    /**
+     * Return to decklist
+     * @private
+     */
+    _returnToDeckList() {
+        this.props.navigator.resetTo({
+            screen: CONSTANTS.screens.deckList.screen,
+            title: CONSTANTS.screens.deckList.title,
+        });
     }
 
     /**
@@ -44,10 +63,9 @@ class DeckCreate extends Component {
      */
     render() {
         return (
-            <View style={{padding: 20}}>
-                <CardList />
-                <TextInput
-                    style={{borderWidth: 1}}
+            <View style={STYLES_GENERAL.container}>
+                <TextField
+                    label='Deck Name'
                     onChangeText={(text) => this.setState({text})}
                     value={this.state.text}
                 />
@@ -62,5 +80,8 @@ class DeckCreate extends Component {
     }
 }
 
+DeckCreate.propTypes = {
+    navigator: PropTypes.object.isRequired,
+};
 
 export default DeckCreate;

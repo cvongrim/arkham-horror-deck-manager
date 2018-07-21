@@ -9,6 +9,9 @@ import realm from '../realm';
 // eslint-disable-next-line no-undef
 const uuidv1 = require('uuid/v1');
 
+// Styles
+import STYLES_GENERAL from '../styles/general';
+
 // Helpers
 import onNavigatorEvent from '../lib/onNavigatorEvent';
 import CONSTANTS from '../constants';
@@ -75,7 +78,7 @@ class DeckList extends Component {
      * Method that runs before the render() has launched
      */
     componentWillUnmount() {
-        this.data_source.removeListener(this.on_change);
+        this.data_source.removeListener(this.onChange);
     }
 
     /**
@@ -130,7 +133,7 @@ class DeckList extends Component {
      */
     render() {
         return (
-            <View style={{flex: 1, padding: 20}}>
+            <View style={STYLES_GENERAL.container}>
                 <FlatList
                     data={this.data_source}
                     renderItem={({item}) => this._renderItem(item)}
@@ -166,6 +169,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 DeckList.propTypes = {
+    cardsDataActions: PropTypes.object.isRequired,
     navigator: PropTypes.object.isRequired,
 };
 
