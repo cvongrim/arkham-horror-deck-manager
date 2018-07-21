@@ -11,7 +11,7 @@ export default function onNavigatorEvent(event) {
     switch (event.type) {
         case 'NavBarButtonPress': {
             switch (event.id) {
-                case 'menuScreen': {
+                case 'menu': {
                     this.props.navigator.toggleDrawer({
                         side: 'left', // the side of the drawer since you can have two, 'left' / 'right'
                     });

@@ -1,6 +1,9 @@
+// React Library Imports
+import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {Alert, Button, TextInput, View} from 'react-native';
-import { TextField } from 'react-native-material-textfield';
+import {TextField} from 'react-native-material-textfield';
+import {RaisedTextButton} from 'react-native-material-buttons';
 import realm from '../realm';
 
 // eslint-disable-next-line no-undef
@@ -11,13 +14,11 @@ import STYLES_GENERAL from '../styles/general';
 
 import CardList from '../components/CardList';
 import CONSTANTS from '../constants';
-import PropTypes from "prop-types";
 
 /**
  * DeckCreate
  */
 class DeckCreate extends Component {
-
     /**
      * Constructor
      * @param {object} props
@@ -69,12 +70,7 @@ class DeckCreate extends Component {
                     onChangeText={(text) => this.setState({text})}
                     value={this.state.text}
                 />
-                <Button
-                    onPress={() => this._addNewDeck(this.state.text)}
-                    title="Add Deck"
-                    color="#841584"
-                    accessibilityLabel="Add Deck"
-                />
+                <RaisedTextButton title='Add Deck' onPress={() => this._addNewDeck(this.state.text)}/>
             </View>
         );
     }

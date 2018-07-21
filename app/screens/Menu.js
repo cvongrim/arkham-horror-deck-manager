@@ -1,45 +1,79 @@
+// React Library Imports
+import PropTypes from 'prop-types';
 import React, {Component} from 'react';
-import {Button, Text, View} from 'react-native';
-import {connect} from 'react-redux';
+import {Button, StyleSheet, View} from 'react-native';
 
+// Constants
+import CONSTANTS from '../constants';
+
+/**
+ * Menu
+ */
 class Menu extends Component {
+    /**
+     * Constructor
+     * @param {object} props
+     */
     constructor(props) {
         super(props);
     }
 
+    /**
+     * Close the menu
+     * @private
+     */
     _closeMenu() {
         this.props.navigator.toggleDrawer({
             side: 'left', // the side of the drawer since you can have two, 'left' / 'right'
         });
     }
 
-    _secondScreen() {
+    /**
+     * Go to create deck screen
+     * @private
+     */
+    _createDeck() {
         this._closeMenu();
         this.props.navigator.handleDeepLink({
-            link: 'screen.DeckCreate',
+            screen: CONSTANTS.screens.deckCreate.screen,
+            title: CONSTANTS.screens.deckCreate.title,
         });
     }
 
-
+    /**
+     * Render the view
+     * @return {object} Return JSX Object to render
+     */
     render() {
         return (
-            <View style={{backgroundColor: '#c6c6c6', flex: 1, padding: 20}}>
-                <Text>Logout</Text>
+            <View style={styles.container}>
+                <Button
+                    onPress={() => this._createDeck()}
+                    title="Add Deck"
+                    color="#841584"
+                    accessibilityLabel="Add Deck"
+                />
                 <Button
                     onPress={() => this._closeMenu()}
                     title="Close Menu"
                     color="#841584"
                     accessibilityLabel="Close Menu"
                 />
-                <Button
-                    onPress={() => this._secondScreen()}
-                    title="Second Screen"
-                    color="#841584"
-                    accessibilityLabel="Second Screen"
-                />
             </View>
         );
     }
 }
 
-export default connect()(Menu);
+Menu.propTypes = {
+    navigator: PropTypes.object.isRequired,
+};
+
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 20,
+    },
+});
+
+export default Menu;
