@@ -1,14 +1,14 @@
-import {combineReducers} from 'redux'
-import { persistStore, persistCombineReducers } from 'redux-persist'
-import storage from 'redux-persist/es/storage'
-import example from './example'
+import {persistCombineReducers} from 'redux-persist';
+import storage from 'redux-persist/es/storage';
+import cards from './cards';
+
 const config = {
     key: 'root',
     storage,
 };
 
 const rootReducer = persistCombineReducers(config, {
-    example
+    cards,
 });
 
 export default rootReducer;

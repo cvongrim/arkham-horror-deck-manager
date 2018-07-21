@@ -2,6 +2,8 @@
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {Alert, FlatList, Text, TouchableOpacity, View} from 'react-native';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 import realm from '../realm';
 
 // eslint-disable-next-line no-undef
@@ -10,6 +12,9 @@ const uuidv1 = require('uuid/v1');
 // Helpers
 import onNavigatorEvent from '../lib/onNavigatorEvent';
 import CONSTANTS from '../constants';
+
+// Actions
+import * as cardsDataActions from '../actions/cards';
 
 /**
  * DeckList
@@ -55,8 +60,15 @@ class DeckList extends Component {
                 Alert.alert('Error retrieving decks.');
             }
         }
-
+        this.getData = this.getData.bind(this);
         this.props.navigator.setOnNavigatorEvent(onNavigatorEvent.bind(this));
+    }
+
+    /**
+     * Method that runs before the render() has launched
+     */
+    async componentDidMount() {
+        await this.getData();
     }
 
     /**
@@ -64,6 +76,13 @@ class DeckList extends Component {
      */
     componentWillUnmount() {
         this.data_source.removeListener(this.on_change);
+    }
+
+    /**
+     * Get data for the resource view
+     */
+    async getData() {
+        await this.props.cardsDataActions.getAllCardData();
     }
 
     // TODO: Cleanup
@@ -123,8 +142,31 @@ class DeckList extends Component {
     }
 }
 
+/**
+ * Retrieve data from redux
+ * @param {object} state
+ * @return {{example: *}}
+ */
+function mapStateToProps(state) {
+    const {cardsData} = state;
+    return {cardsData};
+}
+
+// I can't get this line to not give a jsdoc error : (
+// eslint-disable-next-line valid-jsdoc
+/**
+ * Set up actions so they can be used in the component
+ * @param dispatch
+ * @returns {{actions: {setExampleData?}|ActionCreator<any>|ActionCreatorsMapObject}}
+ */
+function mapDispatchToProps(dispatch) {
+    return {
+        cardsDataActions: bindActionCreators(cardsDataActions, dispatch),
+    };
+}
+
 DeckList.propTypes = {
     navigator: PropTypes.object.isRequired,
 };
 
-export default DeckList;
+export default connect(mapStateToProps, mapDispatchToProps)(DeckList);

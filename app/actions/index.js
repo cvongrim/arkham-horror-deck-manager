@@ -1,5 +1,5 @@
-import * as example from './example'
+import * as cards from './cards';
 
 export const ActionCreators = Object.assign({},
-    example
+    cards
 );
