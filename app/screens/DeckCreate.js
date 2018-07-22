@@ -115,28 +115,30 @@ class DeckCreate extends Component {
         });
         return (
             <View style={STYLES_GENERAL.container}>
-                <TextField
-                    label='Deck Name'
-                    baseColor={COLORS.grey}
-                    tintColor={COLORS.greenDark}
-                    keyboardType={'default'}
-                    onChangeText={(text) => this.setState({text})}
-                    value={this.state.text}
-                />
+                <View style={STYLES_GENERAL.cardContainer}>
+                    <TextField
+                        label='Deck Name'
+                        baseColor={COLORS.grey}
+                        tintColor={COLORS.greenDark}
+                        keyboardType={'default'}
+                        onChangeText={(text) => this.setState({text})}
+                        value={this.state.text}
+                    />
 
-                <ModalSelector
-                    style={styles.investigatorSelector}
-                    data={investigatorData}
-                    initValue="Select an Investigator"
-                    cancelButtonAccessibilityLabel={'Cancel Button'}
-                    onChange={(option) => {
-                        this.setState({investigator: option.key});
-                    }}/>
+                    <ModalSelector
+                        style={styles.investigatorSelector}
+                        data={investigatorData}
+                        initValue="Select an Investigator"
+                        cancelButtonAccessibilityLabel={'Cancel Button'}
+                        onChange={(option) => {
+                            this.setState({investigator: option.key});
+                        }}/>
 
 
-                <RaisedTextButton title='Save Deck' color={COLORS.greenDark} rippleDuration={600}
-                                  rippleOpacity={0.54} titleColor={COLORS.white}
-                                  onPress={() => this._saveNewDeck(this.state.text, this.state.investigator)}/>
+                    <RaisedTextButton title='Save Deck' color={COLORS.greenDark} rippleDuration={600}
+                                      rippleOpacity={0.54} titleColor={COLORS.white}
+                                      onPress={() => this._saveNewDeck(this.state.text, this.state.investigator)}/>
+                </View>
             </View>
         );
     }
