@@ -41,6 +41,7 @@
 		B7C4B5190A4A434B82AB8AE3 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1158E69115514C8996FC3B2F /* Entypo.ttf */; };
 		CF167C55975C4F298746D356 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CD45ED911ED43169E1ADDAB /* libRNVectorIcons.a */; };
 		D3DD252B78154E4F8E4A57FA /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 891724254A924D10B10CFED0 /* Zocial.ttf */; };
+		D6C6C402210534A70067738A /* ahdm-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = D6C6C3DA210534A70067738A /* ahdm-logo.png */; };
 		DCA31538C41C499393D72141 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E28B109AD880467DAB72956E /* libz.tbd */; };
 /* End PBXBuildFile section */
 
@@ -369,6 +370,7 @@
 		9B3E039172C54C63BADFB769 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		B547E4BBB2E845F49122DA1F /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		D6C6C3DA210534A70067738A /* ahdm-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ahdm-logo.png"; sourceTree = "<group>"; };
 		D88C87CCF14F499F9B8A74B8 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		E28B109AD880467DAB72956E /* libz.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		F44FAD4643C34D26A67A7A72 /* libRNFetchBlob.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFetchBlob.a; sourceTree = "<group>"; };
@@ -494,6 +496,7 @@
 		13B07FAE1A68108700A75B9A /* AHDM */ = {
 			isa = PBXGroup;
 			children = (
+				D6C6C3DA210534A70067738A /* ahdm-logo.png */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -1114,6 +1117,7 @@
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				B7C4B5190A4A434B82AB8AE3 /* Entypo.ttf in Resources */,
 				8ED32D45434E4D10AFB98EF5 /* EvilIcons.ttf in Resources */,
+				D6C6C402210534A70067738A /* ahdm-logo.png in Resources */,
 				4C921E4367DB4F00BE19E86C /* Feather.ttf in Resources */,
 				2072037133BC4B6DAB59E575 /* FontAwesome.ttf in Resources */,
 				A24BA09034A549FCA07D4076 /* Foundation.ttf in Resources */,
@@ -1204,13 +1208,7 @@
 				INFOPLIST_FILE = AHDMTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1235,13 +1233,7 @@
 				INFOPLIST_FILE = AHDMTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",

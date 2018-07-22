@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Arkham Horror Deck Manager</string>
+    <string name="splashscreen">Arham Horror Deck Manager Splashscreen</string>
 </resources>
