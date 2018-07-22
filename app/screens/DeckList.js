@@ -1,14 +1,11 @@
 // React Library Imports
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
-import {Alert, FlatList, Text, TouchableOpacity, View} from 'react-native';
+import {FlatList, TouchableOpacity, View} from 'react-native';
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import realm from '../realm';
-
-// eslint-disable-next-line no-undef
-const uuidv1 = require('uuid/v1');
 
 // Actions
 import * as cardsDataActions from '../actions/cards';
@@ -28,23 +25,9 @@ import STYLES_GENERAL from '../styles/general';
  */
 class DeckList extends Component {
     static navigatorButtons = {
-        leftButtons: [
-            {
-                title: 'Menu',
-                id: 'menu',
-                showAsAction: 'always',
-                buttonFontSize: 14,
-            },
-        ],
         rightButtons: [
-            {
-                title: 'Add Deck',
-                id: CONSTANTS.screens.deckCreate.link,
-                showAsAction: 'always',
-                buttonFontSize: 14,
-                width: 15,
-                height: 15,
-            },
+            CONSTANTS.menuBarButtons.menu,
+            CONSTANTS.menuBarButtons.addDeck,
         ],
     };
 
@@ -56,16 +39,6 @@ class DeckList extends Component {
         super(props);
 
         this.data_source = realm.objects('Deck').sorted('creationDate');
-
-        if (this.data_source.length < 1) {
-            try {
-                realm.write(() => {
-                    realm.create('Deck', {id: uuidv1(), name: 'Sample Deck', creationDate: new Date()}, true);
-                });
-            } catch (e) {
-                Alert.alert('Error retrieving decks.');
-            }
-        }
         this.getData = this.getData.bind(this);
         this.props.navigator.setOnNavigatorEvent(onNavigatorEvent.bind(this));
     }

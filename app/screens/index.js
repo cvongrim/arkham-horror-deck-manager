@@ -8,6 +8,9 @@ import DeckList from './DeckList';
 import DeckSingle from './DeckSingle';
 import Cards from './Cards';
 
+// Components
+import ButtonNavBar from '../components/ButtonNavBar';
+
 // TODO Remove areas that do not need redux passed
 /**
  * register all screens of the app (including internal ones)
@@ -20,6 +23,7 @@ export function registerScreens(store, Provider) {
     Navigation.registerComponent('screen.DeckList', () => DeckList, store, Provider);
     Navigation.registerComponent('screen.DeckSingle', () => DeckSingle, store, Provider);
     Navigation.registerComponent('screen.Cards', () => Cards, store, Provider);
+    Navigation.registerComponent('ButtonNavBar', () => ButtonNavBar);
 }
 
 /**

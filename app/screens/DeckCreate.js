@@ -23,12 +23,8 @@ import onNavigatorEvent from '../lib/onNavigatorEvent';
  */
 class DeckCreate extends Component {
     static navigatorButtons = {
-        leftButtons: [
-            {
-                title: 'Menu',
-                id: 'menu',
-                showAsAction: 'always',
-            },
+        rightButtons: [
+            CONSTANTS.menuBarButtons.menu,
         ],
     };
 

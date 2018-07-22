@@ -1,13 +1,11 @@
 /* global module */
 'use strict';
 
-
 const BASE_URL = 'https://arkhamdb.com/'; // Production
 
 module.exports = {
     API_URL: BASE_URL + 'api/',
     BASE_URL: BASE_URL,
-    CARD_CLASSES: ['Guardian, Mystic, Rogue, Seeker, Survivor'], // TODO: Setup
     CARD_TYPES: [
         {
             type_code: 'asset',
@@ -22,8 +20,44 @@ module.exports = {
             type_name: 'Skill',
         },
     ],
+    menuData: [
+        {
+            icon: 'add',
+            key: 'deckCreate',
+            label: 'Create Deck',
+            link: 'deckCreate',
+        },
+        {
+            icon: 'list',
+            key: 'deckList',
+            label: 'Deck List',
+            link: 'deckList',
+        },
+    ],
     RELEASE: true, // Set to True when release the app to an app / play store.
     // This is the content used to connect a screen with a link
+    menuBarButtons: {
+        menu: {
+            component: 'ButtonNavBar',
+            id: 'menu',
+            showAsAction: 'always',
+            passProps: {
+                icon: 'menu',
+                link: 'menu',
+                label: 'Menu',
+            },
+        },
+        addDeck: {
+            component: 'ButtonNavBar',
+            id: 'deckCreate',
+            showAsAction: 'always',
+            passProps: {
+                icon: 'add',
+                link: 'deckCreate',
+                label: 'Deck Create',
+            },
+        },
+    },
     screens:
         {
             deckCreate: {
@@ -48,6 +82,11 @@ module.exports = {
             cards: {
                 link: 'cards',
                 screen: 'screen.Cards',
+            },
+            menuScreen: {
+                link: 'menu',
+                screen: 'menu',
+                title: '',
             },
         },
 };

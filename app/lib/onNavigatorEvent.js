@@ -45,6 +45,12 @@ export default function onNavigatorEvent(event) {
                     });
                     break;
                 }
+                case CONSTANTS.screens.menuScreen.link: {
+                    this.props.navigator.toggleDrawer({
+                        side: 'left',
+                    });
+                    break;
+                }
             }
             break;
         }
