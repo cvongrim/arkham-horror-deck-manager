@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Navigation} from 'react-native-navigation';
 import {Provider} from 'react-redux';
-import { persistStore } from 'redux-persist';
+import {persistStore} from 'redux-persist';
 
 import {registerScreens, registerScreenVisibilityListener} from './screens/index';
 import configureStore from './store/configureStore';
@@ -43,15 +43,17 @@ class App extends Component {
                 },
                 appStyle: {
                     drawUnderStatusBar: true,
-                    navBarButtonColor: colors.black,
-                    navBarHeight: 50, // Optional, set the navBar height in pixels.
+                    navBarTextColor: colors.white,
+                    navBarBackgroundColor: colors.brown,
+                    navBarButtonColor: colors.white,
+                    navBarTitleTextCentered: true,
                     orientation: 'portrait',
-                    screenBackgroundColor: colors.white,
-                    statusBarColor: colors.white,
+                    screenBackgroundColor: colors.beige,
+                    statusBarColor: colors.brown,
                     statusBarTextColorScheme: 'dark',
                 },
             });
-        })
+        });
     }
 }
 

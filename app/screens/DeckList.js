@@ -2,6 +2,7 @@
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {Alert, FlatList, Text, TouchableOpacity, View} from 'react-native';
+
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import realm from '../realm';
@@ -11,6 +12,9 @@ const uuidv1 = require('uuid/v1');
 
 // Actions
 import * as cardsDataActions from '../actions/cards';
+
+// Components
+import DeckInfo from '../components/DeckInfo';
 
 // Helpers
 import onNavigatorEvent from '../lib/onNavigatorEvent';
@@ -29,6 +33,7 @@ class DeckList extends Component {
                 title: 'Menu',
                 id: 'menu',
                 showAsAction: 'always',
+                buttonFontSize: 14,
             },
         ],
         rightButtons: [
@@ -36,6 +41,9 @@ class DeckList extends Component {
                 title: 'Add Deck',
                 id: CONSTANTS.screens.deckCreate.link,
                 showAsAction: 'always',
+                buttonFontSize: 14,
+                width: 15,
+                height: 15,
             },
         ],
     };
@@ -87,8 +95,13 @@ class DeckList extends Component {
             <TouchableOpacity
                 onPress={() => this._navigateToDeck(item)}
                 accessibilityLabel={'Open to Media' + item.name}
+                style={STYLES_GENERAL.cardContainer}
             >
-                <Text>{item.name}</Text>
+                <DeckInfo
+                    cardImage={item.investigator.imagesrc}
+                    deckName={item.name}
+                    deckInvestigator={item.investigator.real_name}
+                    deckType={item.investigator.faction_name}/>
             </TouchableOpacity>
         );
     }

@@ -1,19 +1,23 @@
 // React Library Imports
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
-import {Alert, FlatList, Text, View} from 'react-native';
+import {Alert, FlatList, StyleSheet, Text, View} from 'react-native';
 import {RaisedTextButton} from 'react-native-material-buttons';
 import CONSTANTS from '../constants';
 import realm from '../realm';
-import {
-    CachedImage,
-} from 'react-native-cached-image';
+
+// Components
+import DeckInfo from '../components/DeckInfo';
+import CardInfo from '../components/CardInfo';
 
 // Helpers
 import onNavigatorEvent from '../lib/onNavigatorEvent';
 
 // Styles
 import STYLES_GENERAL from '../styles/general';
+import COLORS from '../styles/colors';
+import TYPES from '../styles/types';
+
 
 /**
  * DeckSingle
@@ -111,18 +115,18 @@ class DeckSingle extends Component {
     /**
      * Render the row in the resource feed
      * @param {object} deckCard
-     * @return {*}
+     * @return {object} JSX Object
      * @private
      */
     _renderItem(deckCard) {
         return (
-            <View>
-                <CachedImage source={{uri: CONSTANTS.BASE_URL + deckCard.card.imagesrc}}
-                             style={{width: 100, height: 150}}/>
-                <Text>{deckCard.card.real_name}</Text>
-                <Text>{deckCard.card.faction_name}</Text>
-                <Text>{deckCard.card.type_name}</Text>
-            </View>
+            <CardInfo
+                cardImage={deckCard.card.imagesrc}
+                cardName={deckCard.card.real_name}
+                cardClass={deckCard.card.faction_name}
+                cardType={deckCard.card.type_name}
+                selected={false}
+            />
         );
     }
 
@@ -133,20 +137,32 @@ class DeckSingle extends Component {
     render() {
         return (
             <View style={STYLES_GENERAL.container}>
-                {this.props.deck.name ?
-                    <Text>{this.props.deck.name}</Text> :
-                    null }
-                {this.props.deck.investigator ?
-                    <Text>{this.props.deck.investigator.name}</Text> :
-                    null}
-                <FlatList
-                    data={this.data_source}
-                    renderItem={({item}) => this._renderItem(item)}
-                    refreshing={this.state.processing}
-                    keyExtractor={(item) => item.id.toString()}
-                />
-                <RaisedTextButton title='Add Cards' onPress={() => this._goToCardsScreen()}/>
-                <RaisedTextButton title='Delete Deck' onPress={() => this._deleteDeck(this.props.deck)}/>
+                <View style={STYLES_GENERAL.cardContainer}>
+                    <DeckInfo
+                        cardImage={this.props.deck.investigator.imagesrc}
+                        deckName={this.props.deck.name}
+                        deckInvestigator={this.props.deck.investigator.name}
+                        deckType={this.props.deck.investigator.faction_name}
+
+                    />
+                    <Text style={[TYPES.header, styles.textCardsHeader]}>Cards ( {this.data_source.length} )</Text>
+                    <FlatList
+                        data={this.data_source}
+                        renderItem={({item}) => this._renderItem(item)}
+                        refreshing={this.state.processing}
+                        keyExtractor={(item) => item.id.toString()}
+                        style={styles.list}
+                        ItemSeparatorComponent={() => <View style={styles.separator} />}
+                    />
+                    <View style={styles.containerButtons}>
+                        <RaisedTextButton style={styles.button} color={COLORS.greenDark} rippleDuration={600}
+                                          rippleOpacity={0.54} titleColor={COLORS.white} title='Add Cards'
+                                          onPress={() => this._goToCardsScreen()}/>
+                        <RaisedTextButton style={styles.button} color={COLORS.red} rippleDuration={600}
+                                          rippleOpacity={0.54} titleColor={COLORS.white} title='Delete Deck'
+                                          onPress={() => this._deleteDeck(this.props.deck)}/>
+                    </View>
+                </View>
             </View>
         );
     }
@@ -156,5 +172,32 @@ DeckSingle.propTypes = {
     deck: PropTypes.object.isRequired,
     navigator: PropTypes.object.isRequired,
 };
+
+const styles = StyleSheet.create({
+    containerButtons: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        padding: STYLES_GENERAL.generalSpacing,
+    },
+    button: {
+        alignSelf: 'center',
+        margin: STYLES_GENERAL.generalSpacing,
+    },
+    separator: {
+        borderBottomWidth: 1,
+        borderBottomColor: COLORS.brown,
+        marginVertical: 10,
+    },
+    textCardsHeader: {
+        borderBottomWidth: 1,
+        paddingVertical: STYLES_GENERAL.generalSpacing,
+        marginBottom: STYLES_GENERAL.generalSpacing,
+    },
+    list: {
+        flex: 1,
+        padding: STYLES_GENERAL.generalSpacing,
+    },
+});
 
 export default DeckSingle;

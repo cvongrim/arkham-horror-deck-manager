@@ -1,16 +1,23 @@
-import React, {Component} from 'react';
-import {Alert, FlatList, Text, TouchableOpacity, View} from 'react-native';
-import {
-    CachedImage,
-} from 'react-native-cached-image';
-import realm from '../realm';
-import CONSTANTS from '../constants';
-import RaisedTextButton from 'react-native-material-buttons/src/components/raised-text-button/index';
+// React Library Imports
 import PropTypes from 'prop-types';
-
+import React, {Component} from 'react';
+import {Alert, FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {CachedImage} from 'react-native-cached-image';
+import realm from '../realm';
+import RaisedTextButton from 'react-native-material-buttons/src/components/raised-text-button/index';
 
 // eslint-disable-next-line no-undef
 const uuidv1 = require('uuid/v1');
+
+// Constants
+import CONSTANTS from '../constants';
+
+// Components
+import CardInfo from '../components/CardInfo';
+
+// Styles
+import STYLES_GENERAL from '../styles/general';
+import COLORS from '../styles/colors';
 
 /**
  * CardList
@@ -147,13 +154,16 @@ class CardList extends Component {
      */
     _renderItem(card) {
         return (
-            <TouchableOpacity onPress={() => this._addRemoveCard(card)}>
-                <CachedImage source={{uri: CONSTANTS.BASE_URL + card.imagesrc}}
-                             style={{width: 100, height: 150}}/>
-                <Text>{card.real_name}</Text>
-                <Text>{card.faction_name}</Text>
-                <Text>{card.type_name}</Text>
-                {this.state.deck.indexOf(card.code) !== -1 ? <Text>Selected</Text> : null}
+            <TouchableOpacity
+                style={STYLES_GENERAL.cardContainer}
+                onPress={() => this._addRemoveCard(card)}>
+                <CardInfo
+                    cardImage={card.imagesrc}
+                    cardName={card.real_name}
+                    cardClass={card.faction_name}
+                    cardType={card.type_name}
+                    selected={this.state.deck.indexOf(card.code) !== -1}
+                />
             </TouchableOpacity>
         );
     }
@@ -225,16 +235,23 @@ class CardList extends Component {
      */
     render() {
         return (
-            <View style={{padding: 20}}>
-                {
-                    CONSTANTS.CARD_TYPES.map((cardType) => {
-                        let filterPosition = this.state.selectedButtons.indexOf(cardType.type_code);
-                        return <RaisedTextButton key={cardType.type_code}
-                                                 title={cardType.type_name}
-                                                 color={-1 === filterPosition ? '#c6c6c6' : '#7c7c7c'}
-                                                 onPress={() => this._filterCards(cardType.type_code)}/>;
-                    })
-                }
+            <View style={STYLES_GENERAL.container}>
+                <View style={styles.containerButtons}>
+                    {
+                        CONSTANTS.CARD_TYPES.map((cardType) => {
+                            let filterPosition = this.state.selectedButtons.indexOf(cardType.type_code);
+                            return <RaisedTextButton
+                                style={styles.button}
+                                key={cardType.type_code}
+                                rippleDuration={600}
+                                rippleOpacity={0.54}
+                                titleColor={COLORS.white}
+                                title={cardType.type_name}
+                                color={-1 === filterPosition ? COLORS.greenDark : COLORS.greenDarkSelected}
+                                onPress={() => this._filterCards(cardType.type_code)}/>;
+                        })
+                    }
+                </View>
 
 
                 <FlatList
@@ -252,5 +269,18 @@ class CardList extends Component {
 CardList.propTypes = {
     deck: PropTypes.object.isRequired,
 };
+
+const styles = StyleSheet.create({
+    containerButtons: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        padding: 10,
+    },
+    button: {
+        alignSelf: 'center',
+        margin: 10,
+    },
+});
 
 export default CardList;
