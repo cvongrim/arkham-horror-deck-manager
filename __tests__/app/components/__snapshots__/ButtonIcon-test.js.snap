@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ButtonIcon renders correctly 1`] = `
+<View
+  accessibilityComponentType={undefined}
+  accessibilityLabel="Open Menu"
+  accessibilityTraits={undefined}
+  accessible={true}
+  collapsable={undefined}
+  hasTVPreferredFocus={undefined}
+  hitSlop={undefined}
+  isTVSelectable={true}
+  nativeID={undefined}
+  onLayout={undefined}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "flex": 1,
+      "flexDirection": "row",
+      "opacity": 1,
+      "paddingHorizontal": 25,
+      "paddingVertical": 8,
+    }
+  }
+  testID={undefined}
+  tvParallaxProperties={undefined}
+>
+  <Text
+    accessible={true}
+    allowFontScaling={false}
+    ellipsizeMode="tail"
+    style={
+      Array [
+        Object {
+          "color": "#808080",
+          "fontSize": 30,
+        },
+        undefined,
+        Object {
+          "fontFamily": "Material Icons",
+          "fontStyle": "normal",
+          "fontWeight": "normal",
+        },
+      ]
+    }
+  >
+    
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={false}
+    ellipsizeMode="tail"
+    style={
+      Array [
+        Object {
+          "alignSelf": "center",
+          "flex": 1,
+          "marginLeft": 12,
+        },
+      ]
+    }
+  >
+    Menu
+  </Text>
+</View>
+`;

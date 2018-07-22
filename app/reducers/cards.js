@@ -20,6 +20,7 @@ export default function(state = initialState.cardsData, action) {
                 ...state,
                 didInvalidate: false,
                 isFetching: false,
+                cards: action.cards,
                 lastUpdated: action.receivedAt,
             };
         case types.REQUEST_CARDS_DATA:
