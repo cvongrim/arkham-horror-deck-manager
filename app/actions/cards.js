@@ -41,6 +41,7 @@ export function getAllCardData() {
     return async (dispatch, getState) => {
         try {
             dispatch(requestCardData());
+            // TODO: Add Caching
             let cards = await _fetchAllCardData();
 
             // TODO: Break out?

@@ -197,15 +197,25 @@ class CardList extends Component {
                 );
             }
         } else {
-            let deckCard = realm.objects('DeckCards')
-                .filtered('card.code = "' + card.code + '" AND deck.id = "' + this.props.deck.id + '"');
+            try {
+                let deckCard = realm.objects('DeckCards')
+                    .filtered('card.code = "' + card.code + '" AND deck.id = "' + this.props.deck.id + '"');
 
-            realm.write(() => {
-                realm.delete(deckCard);
-            });
-            this.setState({
-                deck: this._remove(this.state.deck, card.code),
-            });
+                realm.write(() => {
+                    realm.delete(deckCard);
+                });
+                this.setState({
+                    deck: this._remove(this.state.deck, card.code),
+                });
+            } catch (e) {
+                Alert.alert(
+                    'Error removing card',
+                    e.message,
+                    [
+                        {text: 'OK', onPress: () => null},
+                    ],
+                );
+            }
         }
     }
 

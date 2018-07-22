@@ -68,10 +68,10 @@ class DeckSingle extends Component {
     _deleteDeck(deck) {
         // TODO: Move?
         try {
+            this._returnToDeckList();
             realm.write(() => {
                 realm.delete(deck);
             });
-            this._returnToDeckList();
         } catch (e) {
             Alert.alert(
                 'Error deleting the deck',

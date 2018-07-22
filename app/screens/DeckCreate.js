@@ -80,6 +80,7 @@ class DeckCreate extends Component {
      * @return {object} Return JSX Object to render
      */
     render() {
+        // TODO: Add Investigator select
         return (
             <View style={STYLES_GENERAL.container}>
                 <TextField
