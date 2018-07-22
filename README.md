@@ -1,6 +1,8 @@
 # Project Name
  
-Arkham Horror Deck Manager
+Arkham Horror Deck Manager.
+
+This is a demo project created to show an example React Native app that consumes an external API.
  
 ## Contributing
 
@@ -35,6 +37,25 @@ Create a Pull Request against the development branch
 ## Developing
   
 It's highly recommended to set up your editor to use the .eslintrc.json file so you are alerted immediately by any lint errors.
+
+#### Forms
+
+When creating forms, we are using a few libraries.
+
+Inputs
+- [Buttons - React Native Material Buttons](https://www.npmjs.com/package/react-native-material-buttons)
+- [TextFields - React Native Matieral Textfields](https://github.com/n4kz/react-native-material-textfield)
+
+
+#### Icons
+
+We are using [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons) for all of our icons and specifically the [MaterialIcons](https://material.io/icons/)
+
+#### Styles
+
+- colors.js - All of the app colors should be placed here
+- types.js - All of the font stylings should be placed here. For example the body text, header, subheaders, etc.
+- general.js - Any stylings that are used in multiple areas. Such as the padding that all screens should contain.
 
 ## Reviewing
 

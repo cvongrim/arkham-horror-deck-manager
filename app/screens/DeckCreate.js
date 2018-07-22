@@ -1,7 +1,7 @@
 // React Library Imports
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
-import {Alert, View} from 'react-native';
+import {Alert, StyleSheet, View} from 'react-native';
 import {TextField} from 'react-native-material-textfield';
 import ModalSelector from 'react-native-modal-selector';
 import {RaisedTextButton} from 'react-native-material-buttons';
@@ -11,12 +11,16 @@ import realm from '../realm';
 // eslint-disable-next-line no-undef
 const uuidv1 = require('uuid/v1');
 
-// Styles
-import STYLES_GENERAL from '../styles/general';
+// CONSTANTS
+import CONSTANTS from '../constants';
 
 // Helpers
-import CONSTANTS from '../constants';
 import onNavigatorEvent from '../lib/onNavigatorEvent';
+
+// Styles
+import STYLES_GENERAL from '../styles/general';
+import COLORS from '../styles/colors';
+
 
 /**
  * DeckCreate
@@ -48,18 +52,40 @@ class DeckCreate extends Component {
     /**
      * Save a new deck
      * @param {string} text
+     * @param {string} investigator
      * @private
      */
-    _saveNewDeck(text) {
-        try {
-            let id = uuidv1();
-            realm.write(() => {
-                let investigatorCard = realm.objectForPrimaryKey('Cards', this.state.investigator);
-                realm.create('Deck', {id: id, name: text, investigator: investigatorCard, creationDate: new Date()}, true);
-            });
-            this._goToDeckSingleScreen(realm.objectForPrimaryKey('Deck', id));
-        } catch (e) {
-            Alert.alert('Error on creation');
+    _saveNewDeck(text, investigator) {
+        if (text && investigator) {
+            try {
+                let id = uuidv1();
+                realm.write(() => {
+                    let investigatorCard = realm.objectForPrimaryKey('Cards', investigator);
+                    realm.create('Deck', {
+                        id: id,
+                        name: text,
+                        investigator: investigatorCard,
+                        creationDate: new Date(),
+                    }, true);
+                });
+                this._goToDeckSingleScreen(realm.objectForPrimaryKey('Deck', id));
+            } catch (e) {
+                Alert.alert(
+                    'Error creating deck.',
+                    e.message,
+                    [
+                        {text: 'OK', onPress: () => null},
+                    ],
+                );
+            }
+        } else {
+            Alert.alert(
+                'All fields required.',
+                'You must give the deck a name and select an investigator.',
+                [
+                    {text: 'OK', onPress: () => null},
+                ],
+            );
         }
     }
 
@@ -83,7 +109,6 @@ class DeckCreate extends Component {
      * @return {object} Return JSX Object to render
      */
     render() {
-        // TODO: Add Form Validation
         let investigatorData = [];
         this.investigator_data_source.map((investigator) => {
             investigatorData.push({key: investigator.code, label: investigator.name});
@@ -92,10 +117,15 @@ class DeckCreate extends Component {
             <View style={STYLES_GENERAL.container}>
                 <TextField
                     label='Deck Name'
+                    baseColor={COLORS.grey}
+                    tintColor={COLORS.greenDark}
+                    keyboardType={'default'}
                     onChangeText={(text) => this.setState({text})}
                     value={this.state.text}
                 />
+
                 <ModalSelector
+                    style={styles.investigatorSelector}
                     data={investigatorData}
                     initValue="Select an Investigator"
                     cancelButtonAccessibilityLabel={'Cancel Button'}
@@ -104,7 +134,9 @@ class DeckCreate extends Component {
                     }}/>
 
 
-                <RaisedTextButton title='Save Deck' onPress={() => this._saveNewDeck(this.state.text)}/>
+                <RaisedTextButton title='Save Deck' color={COLORS.greenDark} rippleDuration={600}
+                                  rippleOpacity={0.54} titleColor={COLORS.white}
+                                  onPress={() => this._saveNewDeck(this.state.text, this.state.investigator)}/>
             </View>
         );
     }
@@ -113,5 +145,11 @@ class DeckCreate extends Component {
 DeckCreate.propTypes = {
     navigator: PropTypes.object.isRequired,
 };
+
+const styles = StyleSheet.create({
+    investigatorSelector: {
+        marginVertical: 20,
+    },
+});
 
 export default DeckCreate;
