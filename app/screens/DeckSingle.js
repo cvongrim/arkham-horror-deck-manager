@@ -134,6 +134,7 @@ class DeckSingle extends Component {
         return (
             <View style={STYLES_GENERAL.container}>
                 <Text>{this.props.deck.name}</Text>
+                <Text>{this.props.deck.investigator.name}</Text>
                 <FlatList
                     data={this.data_source}
                     renderItem={({item}) => this._renderItem(item)}

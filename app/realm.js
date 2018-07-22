@@ -9,9 +9,10 @@ Deck.schema = {
     name: 'Deck',
     primaryKey: 'id',
     properties: {
+        id: 'string',
         creationDate: 'date',
         name: 'string',
-        id: 'string',
+        investigator: {type: 'Cards'},
     },
 };
 
