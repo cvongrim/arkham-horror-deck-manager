@@ -1,8 +1,7 @@
 // React Library Imports
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
-import {Alert, FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {CachedImage} from 'react-native-cached-image';
+import {Alert, FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
 import realm from '../realm';
 import RaisedTextButton from 'react-native-material-buttons/src/components/raised-text-button/index';
 

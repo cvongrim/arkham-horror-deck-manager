@@ -54,8 +54,11 @@ class DeckSingle extends Component {
 
     // TODO: Cleanup
     onChange = async (name, changes) => {
+        // eslint-disable-next-line no-invalid-this
         this.setState({processing: true});
+        // eslint-disable-next-line no-invalid-this
         await this.forceUpdate();
+        // eslint-disable-next-line no-invalid-this
         this.setState({processing: false});
     };
 

@@ -68,7 +68,7 @@ We are using [react-native-vector-icons](https://github.com/oblador/react-native
 - If it makes sense, request documentation added to confluence.
 - Packages versions in package.json should be locked.
 - Methods only used in a class should be declared private with a leading underscore _method()
-- Run `./node_modules/.bin/eslint ./app` from the root directory and make sure it comes back clean.
+- Run `./node_modules/.bin/eslint ./app --config eslintrc.json` from the root directory and make sure it comes back clean.
 - Run `npm test` and make sure it comes back clean.
 
 ## Test

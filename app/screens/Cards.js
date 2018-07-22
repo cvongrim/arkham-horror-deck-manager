@@ -1,13 +1,13 @@
 // React Library Imports
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {View} from 'react-native';
+
+// Components
+import CardList from '../components/CardList';
 
 // Styles
 import STYLES_GENERAL from '../styles/general';
-
-import CardList from '../components/CardList';
-import COLORS from '../styles/colors';
 
 /**
  * DeckCreate

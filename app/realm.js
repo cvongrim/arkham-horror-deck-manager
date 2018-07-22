@@ -2,6 +2,9 @@
 
 import Realm from 'realm';
 
+/**
+ * Class to store a user's saved decks
+ */
 class Deck extends Realm.Object {
 }
 
@@ -16,6 +19,9 @@ Deck.schema = {
     },
 };
 
+/**
+ * Class to store a decks's saved cards
+ */
 class DeckCards extends Realm.Object {
 }
 
@@ -31,6 +37,10 @@ DeckCards.schema = {
     },
 };
 
+/**
+ * Class to store all the cards from the ArkhamDB API. We save them locally because the API has no implementation
+ * for filtering. Saving it to Realm let's us make use of it's filtering capabilities.
+ */
 class Cards extends Realm.Object {
 }
 

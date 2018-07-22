@@ -59,12 +59,6 @@ const styles = StyleSheet.create({
         height: 72,
         width: 100,
     },
-    textDeckName: {
-        fontSize: 16,
-    },
-    textGeneral: {
-        fontSize: 12,
-    },
 });
 
 export default DeckInfo;

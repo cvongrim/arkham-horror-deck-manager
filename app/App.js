@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import {Navigation} from 'react-native-navigation';
 import {Provider} from 'react-redux';
 import {persistStore} from 'redux-persist';
@@ -14,12 +14,22 @@ import colors from './styles/colors';
 registerScreens(store, Provider);
 registerScreenVisibilityListener();
 
+/**
+ * App
+ */
 class App extends Component {
+    /**
+     * Constructor
+     * @param {object} props
+     */
     constructor(props) {
         super(props);
         this.startApp();
     }
 
+    /**
+     * Start our app!
+     */
     startApp() {
         persistStore(store, null, () => {
             Navigation.startSingleScreenApp({
