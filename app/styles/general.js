@@ -22,5 +22,9 @@ module.exports = {
         flex: 1,
         padding: generalSpacing,
         marginBottom: generalSpacing,
+        shadowOffset: {width: 1, height: 1},
+        shadowColor: COLORS.black,
+        shadowOpacity: 0.3,
+        elevation: 3,
     },
 };
