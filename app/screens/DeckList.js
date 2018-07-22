@@ -47,12 +47,7 @@ class DeckList extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            processing: true,
-        };
-
         this.data_source = realm.objects('Deck').sorted('creationDate');
-        this.data_source.addListener(this.onChange);
 
         if (this.data_source.length < 1) {
             try {
@@ -70,15 +65,8 @@ class DeckList extends Component {
     /**
      * Method that runs before the render() has launched
      */
-    async componentDidMount() {
+    async componentWillMount() {
         await this.getData();
-    }
-
-    /**
-     * Method that runs before the render() has launched
-     */
-    componentWillUnmount() {
-        this.data_source.removeListener(this.onChange);
     }
 
     /**
@@ -87,13 +75,6 @@ class DeckList extends Component {
     async getData() {
         await this.props.cardsDataActions.getAllCardData();
     }
-
-    // TODO: Cleanup
-    onChange = async (name, changes) => {
-        this.setState({processing: true});
-        await this.forceUpdate();
-        this.setState({processing: false});
-    };
 
     /**
      * Render the row in the resource feed
@@ -134,12 +115,13 @@ class DeckList extends Component {
     render() {
         return (
             <View style={STYLES_GENERAL.container}>
-                <FlatList
-                    data={this.data_source}
-                    renderItem={({item}) => this._renderItem(item)}
-                    refreshing={this.state.processing}
-                    keyExtractor={(item) => item.id.toString()}
-                />
+                {this.data_source.length > 0 ?
+                    <FlatList
+                        data={this.data_source}
+                        renderItem={({item}) => this._renderItem(item)}
+                        keyExtractor={(item) => item.id.toString()}
+                    /> :
+                    null}
             </View>
         );
     }
