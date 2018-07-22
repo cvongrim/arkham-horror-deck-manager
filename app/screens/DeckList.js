@@ -2,7 +2,6 @@
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {FlatList, TouchableOpacity, View} from 'react-native';
-import SplashScreen from 'react-native-splash-screen';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import realm from '../realm';
