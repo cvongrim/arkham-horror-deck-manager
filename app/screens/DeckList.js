@@ -9,15 +9,15 @@ import realm from '../realm';
 // eslint-disable-next-line no-undef
 const uuidv1 = require('uuid/v1');
 
-// Styles
-import STYLES_GENERAL from '../styles/general';
+// Actions
+import * as cardsDataActions from '../actions/cards';
 
 // Helpers
 import onNavigatorEvent from '../lib/onNavigatorEvent';
 import CONSTANTS from '../constants';
 
-// Actions
-import * as cardsDataActions from '../actions/cards';
+// Styles
+import STYLES_GENERAL from '../styles/general';
 
 /**
  * DeckList

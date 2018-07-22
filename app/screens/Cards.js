@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {View} from 'react-native';
 
-
 // Styles
 import STYLES_GENERAL from '../styles/general';
 

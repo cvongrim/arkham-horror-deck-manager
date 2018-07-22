@@ -9,6 +9,9 @@ import {
     CachedImage,
 } from 'react-native-cached-image';
 
+// Helpers
+import onNavigatorEvent from '../lib/onNavigatorEvent';
+
 // Styles
 import STYLES_GENERAL from '../styles/general';
 
@@ -16,6 +19,16 @@ import STYLES_GENERAL from '../styles/general';
  * DeckSingle
  */
 class DeckSingle extends Component {
+    static navigatorButtons = {
+        leftButtons: [
+            {
+                title: 'Menu',
+                id: 'menu',
+                showAsAction: 'always',
+            },
+        ],
+    };
+
     /**
      * Constructor
      * @param {object} props
@@ -29,6 +42,7 @@ class DeckSingle extends Component {
 
         this.data_source = realm.objects('DeckCards').filtered('deck.id = "' + this.props.deck.id + '"');
         this.data_source.addListener(this.onChange);
+        this.props.navigator.setOnNavigatorEvent(onNavigatorEvent.bind(this));
     }
 
     /**

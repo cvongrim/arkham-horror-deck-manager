@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {Button, StyleSheet, View} from 'react-native';
 
-// Constants
-import CONSTANTS from '../constants';
+// Helpers
+import onNavigatorEvent from '../lib/onNavigatorEvent';
 
 /**
  * Menu
@@ -16,6 +16,8 @@ class Menu extends Component {
      */
     constructor(props) {
         super(props);
+
+        this.props.navigator.setOnNavigatorEvent(onNavigatorEvent.bind(this));
     }
 
     /**
@@ -24,7 +26,7 @@ class Menu extends Component {
      */
     _closeMenu() {
         this.props.navigator.toggleDrawer({
-            side: 'left', // the side of the drawer since you can have two, 'left' / 'right'
+            side: 'left',
         });
     }
 
@@ -35,8 +37,18 @@ class Menu extends Component {
     _createDeck() {
         this._closeMenu();
         this.props.navigator.handleDeepLink({
-            screen: CONSTANTS.screens.deckCreate.screen,
-            title: CONSTANTS.screens.deckCreate.title,
+            link: 'deckCreate',
+        });
+    }
+
+    /**
+     * Go to create deck screen
+     * @private
+     */
+    _showDecks() {
+        this._closeMenu();
+        this.props.navigator.handleDeepLink({
+            link: 'deckList',
         });
     }
 
@@ -52,6 +64,12 @@ class Menu extends Component {
                     title="Add Deck"
                     color="#841584"
                     accessibilityLabel="Add Deck"
+                />
+                <Button
+                    onPress={() => this._showDecks()}
+                    title="Deck List"
+                    color="#841584"
+                    accessibilityLabel="Deck List"
                 />
                 <Button
                     onPress={() => this._closeMenu()}

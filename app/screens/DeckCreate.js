@@ -12,12 +12,24 @@ const uuidv1 = require('uuid/v1');
 // Styles
 import STYLES_GENERAL from '../styles/general';
 
+// Helpers
 import CONSTANTS from '../constants';
+import onNavigatorEvent from '../lib/onNavigatorEvent';
 
 /**
  * DeckCreate
  */
 class DeckCreate extends Component {
+    static navigatorButtons = {
+        leftButtons: [
+            {
+                title: 'Menu',
+                id: 'menu',
+                showAsAction: 'always',
+            },
+        ],
+    };
+
     /**
      * Constructor
      * @param {object} props
@@ -27,6 +39,7 @@ class DeckCreate extends Component {
 
         this.state = {text: ''};
         this._saveNewDeck = this._saveNewDeck.bind(this);
+        this.props.navigator.setOnNavigatorEvent(onNavigatorEvent.bind(this));
     }
 
     /**
