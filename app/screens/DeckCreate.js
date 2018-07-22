@@ -1,7 +1,7 @@
 // React Library Imports
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
-import {Alert, Button, TextInput, View} from 'react-native';
+import {Alert, View} from 'react-native';
 import {TextField} from 'react-native-material-textfield';
 import {RaisedTextButton} from 'react-native-material-buttons';
 import realm from '../realm';
@@ -12,7 +12,6 @@ const uuidv1 = require('uuid/v1');
 // Styles
 import STYLES_GENERAL from '../styles/general';
 
-import CardList from '../components/CardList';
 import CONSTANTS from '../constants';
 
 /**
@@ -27,34 +26,39 @@ class DeckCreate extends Component {
         super(props);
 
         this.state = {text: ''};
-        this._addNewDeck = this._addNewDeck.bind(this);
+        this._saveNewDeck = this._saveNewDeck.bind(this);
     }
 
     /**
-     * Add a new deck
+     * Save a new deck
      * @param {string} text
      * @private
      */
-    _addNewDeck(text) {
+    _saveNewDeck(text) {
         // TODO: Move?
         try {
+            let id = uuidv1();
             realm.write(() => {
-                realm.create('Deck', {id: uuidv1(), name: text, creationDate: new Date()}, true);
+                realm.create('Deck', {id: id, name: text, creationDate: new Date()}, true);
             });
-            this._returnToDeckList();
+            this._goToDeckSingleScreen(realm.objectForPrimaryKey('Deck', id));
         } catch (e) {
             Alert.alert('Error on creation');
         }
     }
 
     /**
-     * Return to decklist
+     * Go to deck edit screen
+     * @param {object} deck The newly created deck to load on the single screen.
      * @private
      */
-    _returnToDeckList() {
+    _goToDeckSingleScreen(deck) {
         this.props.navigator.resetTo({
-            screen: CONSTANTS.screens.deckList.screen,
-            title: CONSTANTS.screens.deckList.title,
+            screen: CONSTANTS.screens.deckSingle.screen,
+            title: deck.name,
+            passProps: {
+                deck: deck,
+            },
         });
     }
 
@@ -65,13 +69,12 @@ class DeckCreate extends Component {
     render() {
         return (
             <View style={STYLES_GENERAL.container}>
-                <CardList />
                 <TextField
                     label='Deck Name'
                     onChangeText={(text) => this.setState({text})}
                     value={this.state.text}
                 />
-                <RaisedTextButton title='Add Deck' onPress={() => this._addNewDeck(this.state.text)}/>
+                <RaisedTextButton title='Save Deck' onPress={() => this._saveNewDeck(this.state.text)}/>
             </View>
         );
     }

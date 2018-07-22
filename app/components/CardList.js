@@ -1,11 +1,16 @@
 import React, {Component} from 'react';
-import {FlatList, Text, View} from 'react-native';
+import {Alert, FlatList, Text, TouchableOpacity, View} from 'react-native';
 import {
     CachedImage,
 } from 'react-native-cached-image';
 import realm from '../realm';
 import CONSTANTS from '../constants';
 import RaisedTextButton from 'react-native-material-buttons/src/components/raised-text-button/index';
+import PropTypes from 'prop-types';
+
+
+// eslint-disable-next-line no-undef
+const uuidv1 = require('uuid/v1');
 
 /**
  * CardList
@@ -21,9 +26,36 @@ class CardList extends Component {
         this.state = {
             processing: true,
             dataSource: realm.objects('Cards').filtered(this._defaultFilter()),
+            deck: [],
             selectedButtons: [],
         };
         this._filterCards = this._filterCards.bind(this);
+        this._renderItem = this._renderItem.bind(this);
+    }
+
+    /**
+     * componentDidMount
+     */
+    componentDidMount() {
+        this.setState({
+            deck: this._getInitialCardsInDeck(),
+        });
+    }
+
+    /**
+     * Get the intial cards that were already selected in the deck
+     * @return {Array}
+     * @private
+     */
+    _getInitialCardsInDeck() {
+        let deckCards = realm.objects('DeckCards');
+        let deck = [];
+
+        deckCards.forEach((item) => {
+            deck.push(item.card.code);
+        });
+
+        return deck;
     }
 
     /**
@@ -109,19 +141,20 @@ class CardList extends Component {
 
     /**
      * Render the row in the resource feed
-     * @param {object} item
+     * @param {object} card
      * @return {*}
      * @private
      */
-    _renderItem(item) {
+    _renderItem(card) {
         return (
-            <View>
-                <CachedImage source={{uri: CONSTANTS.BASE_URL + item.imagesrc}}
+            <TouchableOpacity onPress={() => this._addRemoveCard(card)}>
+                <CachedImage source={{uri: CONSTANTS.BASE_URL + card.imagesrc}}
                              style={{width: 100, height: 150}}/>
-                <Text>{item.real_name}</Text>
-                <Text>{item.faction_name}</Text>
-                <Text>{item.type_name}</Text>
-            </View>
+                <Text>{card.real_name}</Text>
+                <Text>{card.faction_name}</Text>
+                <Text>{card.type_name}</Text>
+                {this.state.deck.indexOf(card.code) !== -1 ? <Text>Selected</Text> : null}
+            </TouchableOpacity>
         );
     }
 
@@ -135,6 +168,45 @@ class CardList extends Component {
     _remove(array, element) {
         // TODO: Move to helper library
         return array.filter((e) => e !== element);
+    }
+
+
+    /**
+     * Add or remove a card to the deck.
+     * @param {object} card The card to remove or add
+     * @private
+     */
+    _addRemoveCard(card) {
+        // TODO: Refactor
+        if (this.state.deck.indexOf(card.code) === -1) {
+            try {
+                let id = uuidv1();
+                realm.write(() => {
+                    realm.create('DeckCards', {id: id, card: card, count: 1, deck: this.props.deck}, true);
+                });
+                this.setState({
+                    deck: this.state.deck.concat(card.code),
+                });
+            } catch (e) {
+                Alert.alert(
+                    'Error adding card',
+                    e.message,
+                    [
+                        {text: 'OK', onPress: () => null},
+                    ],
+                );
+            }
+        } else {
+            let deckCard = realm.objects('DeckCards')
+                .filtered('card.code = "' + card.code + '" AND deck.id = "' + this.props.deck.id + '"');
+
+            realm.write(() => {
+                realm.delete(deckCard);
+            });
+            this.setState({
+                deck: this._remove(this.state.deck, card.code),
+            });
+        }
     }
 
     /**
@@ -156,6 +228,7 @@ class CardList extends Component {
 
 
                 <FlatList
+                    extraData={this.state}
                     data={this.state.dataSource}
                     renderItem={({item}) => this._renderItem(item)}
                     refreshing={this.state.processing}
@@ -166,5 +239,8 @@ class CardList extends Component {
     }
 }
 
+CardList.propTypes = {
+    deck: PropTypes.object.isRequired,
+};
 
 export default CardList;

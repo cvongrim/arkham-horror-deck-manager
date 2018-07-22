@@ -15,6 +15,21 @@ Deck.schema = {
     },
 };
 
+class DeckCards extends Realm.Object {
+}
+
+DeckCards.schema = {
+    name: 'DeckCards',
+    primaryKey: 'id',
+    properties: {
+        id: 'string',
+        card: {type: 'Cards'},
+        count: 'int',
+        deck: {type: 'Deck'},
+
+    },
+};
+
 class Cards extends Realm.Object {
 }
 
@@ -63,4 +78,4 @@ Cards.schema = {
     },
 };
 
-export default new Realm({schema: [Cards, Deck]});
+export default new Realm({schema: [Cards, DeckCards, Deck]});

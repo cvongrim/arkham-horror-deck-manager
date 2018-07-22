@@ -7,7 +7,7 @@ const BASE_URL = 'https://arkhamdb.com/'; // Production
 module.exports = {
     API_URL: BASE_URL + 'api/',
     BASE_URL: BASE_URL,
-    CARD_CLASSES: ['Guardian, Mystic, Rogue, Seeker, Survivor'],
+    CARD_CLASSES: ['Guardian, Mystic, Rogue, Seeker, Survivor'], // TODO: Setup
     CARD_TYPES: [
         {
             type_code: 'asset',
@@ -22,7 +22,6 @@ module.exports = {
             type_name: 'Skill',
         },
     ],
-    // CARD_TYPES: ['Asset, Event, Skill'],
     RELEASE: true, // Set to True when release the app to an app / play store.
     // This is the content used to connect a screen with a link
     screens:
@@ -32,6 +31,11 @@ module.exports = {
                 screen: 'screen.DeckCreate',
                 title: 'Deck Create',
             },
+            deckEdit: {
+                link: 'deckEdit',
+                screen: 'screen.DeckEdit',
+                title: 'Deck Edit',
+            },
             deckList: {
                 link: 'deckList',
                 screen: 'screen.DeckList',
@@ -40,6 +44,10 @@ module.exports = {
             deckSingle: {
                 link: 'deckSingle',
                 screen: 'screen.DeckSingle',
+            },
+            cards: {
+                link: 'cards',
+                screen: 'screen.Cards',
             },
         },
 };
