@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // React Library Imports
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
@@ -47,7 +48,9 @@ class CardInfo extends Component {
         return (
             <View onPress={() => this._viewCard(this.props.cardImage)} style={styles.container}>
                 <TouchableOpacity onPress={() => this._viewCard(this.props.cardImage)} style={styles.container}>
-                <CachedImage source={{uri: CONSTANTS.BASE_URL + this.props.cardImage}}
+                <CachedImage defaultSource={require('../img/card-placeholder.jpg')}
+                             fallbackSource={require('../img/card-placeholder.jpg')}
+                             source={{uri: CONSTANTS.BASE_URL + this.props.cardImage}}
                              style={styles.cardImage}/>
                 </TouchableOpacity>
                 <View style={styles.containerInfo}>
@@ -77,6 +80,7 @@ const styles = StyleSheet.create({
     containerInfo: {
         backgroundColor: COLORS.white,
         paddingLeft: 10,
+        flex: 1,
     },
     cardImage: {
         height: 72,

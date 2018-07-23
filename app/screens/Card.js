@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // React Library Imports
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
@@ -35,7 +36,9 @@ class Card extends Component {
     render() {
         return (
             <View style={STYLES_GENERAL.container}>
-                <CachedImage source={{uri: CONSTANTS.BASE_URL + this.props.cardImage}}
+                <CachedImage defaultSource={require('../img/card-placeholder.jpg')}
+                             fallbackSource={require('../img/card-placeholder.jpg')}
+                             source={{uri: CONSTANTS.BASE_URL + this.props.cardImage}}
                              style={styles.cardImage}/>
             </View>
         );

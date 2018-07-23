@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
     containerInfo: {
         backgroundColor: COLORS.white,
         paddingLeft: 10,
+        flex: 1,
     },
     cardImage: {
         height: 72,
