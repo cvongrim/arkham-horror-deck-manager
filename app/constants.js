@@ -83,6 +83,10 @@ module.exports = {
                 link: 'cards',
                 screen: 'screen.Cards',
             },
+            card: {
+                link: 'card',
+                screen: 'screen.Card',
+            },
             menuScreen: {
                 link: 'menu',
                 screen: 'menu',

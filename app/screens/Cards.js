@@ -28,7 +28,7 @@ class Cards extends Component {
     render() {
         return (
             <View style={STYLES_GENERAL.container}>
-                <CardList deck={this.props.deck}/>
+                <CardList deck={this.props.deck} navigator={this.props.navigator}/>
             </View>
         );
     }

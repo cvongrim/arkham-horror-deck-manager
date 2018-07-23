@@ -1,7 +1,7 @@
 // React Library Imports
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
-import {Alert, FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Alert, FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import realm from '../realm';
 import RaisedTextButton from 'react-native-material-buttons/src/components/raised-text-button/index';
 
@@ -157,6 +157,7 @@ class CardList extends Component {
                 style={STYLES_GENERAL.cardContainer}
                 onPress={() => this._addRemoveCard(card)}>
                 <CardInfo
+                    navigator={this.props.navigator}
                     cardImage={card.imagesrc}
                     cardName={card.real_name}
                     cardClass={card.faction_name}
@@ -235,6 +236,10 @@ class CardList extends Component {
     render() {
         return (
             <View style={STYLES_GENERAL.container}>
+
+                <Text style={styles.helperText}>Tap the card image to view it larger or select the whole row to add it
+                    to your deck.</Text>
+
                 <View style={styles.containerButtons}>
                     {
                         CONSTANTS.CARD_TYPES.map((cardType) => {
@@ -252,7 +257,6 @@ class CardList extends Component {
                     }
                 </View>
 
-
                 <FlatList
                     extraData={this.state}
                     data={this.state.dataSource}
@@ -267,6 +271,7 @@ class CardList extends Component {
 
 CardList.propTypes = {
     deck: PropTypes.object.isRequired,
+    navigator: PropTypes.object.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -274,11 +279,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
-        padding: 10,
+        padding: STYLES_GENERAL.generalSpacing,
     },
     button: {
         alignSelf: 'center',
-        margin: 10,
+        margin: STYLES_GENERAL.generalSpacing,
+    },
+    helperText: {
+        marginVertical: STYLES_GENERAL.generalSpacing,
     },
 });
 

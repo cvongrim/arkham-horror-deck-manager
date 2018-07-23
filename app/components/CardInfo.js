@@ -1,7 +1,7 @@
 // React Library Imports
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
-import {Text, StyleSheet, View} from 'react-native';
+import {Text, TouchableOpacity, StyleSheet, View} from 'react-native';
 import {CachedImage} from 'react-native-cached-image';
 
 // Constants
@@ -25,14 +25,31 @@ class CardInfo extends Component {
     }
 
     /**
+     * Navigate to the view card screen
+     * @param {string} cardImage
+     * @private
+     */
+    _viewCard(cardImage) {
+        this.props.navigator.push({
+            screen: CONSTANTS.screens.card.screen,
+            title: this.props.cardName,
+            passProps: {
+                cardImage: cardImage,
+            },
+        });
+    }
+
+    /**
      * Render the view
      * @return {object} Return JSX Object to render
      */
     render() {
         return (
-            <View style={styles.container}>
+            <View onPress={() => this._viewCard(this.props.cardImage)} style={styles.container}>
+                <TouchableOpacity onPress={() => this._viewCard(this.props.cardImage)} style={styles.container}>
                 <CachedImage source={{uri: CONSTANTS.BASE_URL + this.props.cardImage}}
                              style={styles.cardImage}/>
+                </TouchableOpacity>
                 <View style={styles.containerInfo}>
                     <Text numberOfLines={3} style={TYPES.header}>{this.props.cardName}</Text>
                     <Text numberOfLines={1} style={TYPES.body}>{this.props.cardClass}</Text>
@@ -45,10 +62,11 @@ class CardInfo extends Component {
 }
 
 CardInfo.propTypes = {
-    cardImage: PropTypes.string,
-    cardName: PropTypes.string,
-    cardClass: PropTypes.string,
-    cardType: PropTypes.string,
+    navigator: PropTypes.object.isRequired,
+    cardImage: PropTypes.string.isRequired,
+    cardName: PropTypes.string.isRequired,
+    cardClass: PropTypes.string.isRequired,
+    cardType: PropTypes.string.isRequired,
     selected: PropTypes.bool,
 };
 

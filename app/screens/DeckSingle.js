@@ -120,6 +120,7 @@ class DeckSingle extends Component {
     _renderItem(deckCard) {
         return (
             <CardInfo
+                navigator={this.props.navigator}
                 cardImage={deckCard.card.imagesrc}
                 cardName={deckCard.card.real_name}
                 cardClass={deckCard.card.faction_name}

@@ -7,6 +7,7 @@ import DeckCreate from './DeckCreate';
 import DeckList from './DeckList';
 import DeckSingle from './DeckSingle';
 import Cards from './Cards';
+import Card from './Card';
 
 // Components
 import ButtonNavBar from '../components/ButtonNavBar';
@@ -23,6 +24,7 @@ export function registerScreens(store, Provider) {
     Navigation.registerComponent('screen.DeckList', () => DeckList, store, Provider);
     Navigation.registerComponent('screen.DeckSingle', () => DeckSingle, store, Provider);
     Navigation.registerComponent('screen.Cards', () => Cards, store, Provider);
+    Navigation.registerComponent('screen.Card', () => Card, store, Provider);
     Navigation.registerComponent('ButtonNavBar', () => ButtonNavBar);
 }
 
