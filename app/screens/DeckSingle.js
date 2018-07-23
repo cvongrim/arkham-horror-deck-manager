@@ -38,6 +38,7 @@ class DeckSingle extends Component {
 
         this.state = {
             processing: false,
+            deckDeleted: false,
         };
 
         this.data_source = realm.objects('DeckCards').filtered('deck.id = "' + this.props.deck.id + '"');
@@ -69,12 +70,14 @@ class DeckSingle extends Component {
      * @private
      */
     _deleteDeck(deck) {
-        // TODO: Move?
         try {
-            this._returnToDeckList();
+            this.setState({
+                deckDeleted: true,
+            });
             realm.write(() => {
                 realm.delete(deck);
             });
+            this._returnToDeckList();
         } catch (e) {
             Alert.alert(
                 'Error deleting the deck',
@@ -137,32 +140,35 @@ class DeckSingle extends Component {
     render() {
         return (
             <View style={STYLES_GENERAL.container}>
-                <View style={STYLES_GENERAL.cardContainer}>
-                    <DeckInfo
-                        cardImage={this.props.deck.investigator.imagesrc}
-                        deckName={this.props.deck.name}
-                        deckInvestigator={this.props.deck.investigator.name}
-                        deckType={this.props.deck.investigator.faction_name}
+                {!this.state.deckDeleted ?
+                    <View style={STYLES_GENERAL.cardContainer}>
 
-                    />
-                    <Text style={[TYPES.header, styles.textCardsHeader]}>Cards ( {this.data_source.length} )</Text>
-                    <FlatList
-                        data={this.data_source}
-                        renderItem={({item}) => this._renderItem(item)}
-                        refreshing={this.state.processing}
-                        keyExtractor={(item) => item.id.toString()}
-                        style={styles.list}
-                        ItemSeparatorComponent={() => <View style={styles.separator} />}
-                    />
-                    <View style={styles.containerButtons}>
-                        <RaisedTextButton style={styles.button} color={COLORS.greenDark} rippleDuration={600}
-                                          rippleOpacity={0.54} titleColor={COLORS.white} title='Add Cards'
-                                          onPress={() => this._goToCardsScreen()}/>
-                        <RaisedTextButton style={styles.button} color={COLORS.red} rippleDuration={600}
-                                          rippleOpacity={0.54} titleColor={COLORS.white} title='Delete Deck'
-                                          onPress={() => this._deleteDeck(this.props.deck)}/>
-                    </View>
-                </View>
+                        <DeckInfo
+                            cardImage={this.props.deck.investigator.imagesrc}
+                            deckName={this.props.deck.name}
+                            deckInvestigator={this.props.deck.investigator.name}
+                            deckType={this.props.deck.investigator.faction_name}
+
+                        />
+                        <Text style={[TYPES.header, styles.textCardsHeader]}>Cards ( {this.data_source.length} )</Text>
+                        <FlatList
+                            data={this.data_source}
+                            renderItem={({item}) => this._renderItem(item)}
+                            refreshing={this.state.processing}
+                            keyExtractor={(item) => item.id.toString()}
+                            style={styles.list}
+                            ItemSeparatorComponent={() => <View style={styles.separator}/>}
+                        />
+                        <View style={styles.containerButtons}>
+                            <RaisedTextButton style={styles.button} color={COLORS.greenDark} rippleDuration={600}
+                                              rippleOpacity={0.54} titleColor={COLORS.white} title='Add Cards'
+                                              onPress={() => this._goToCardsScreen()}/>
+                            <RaisedTextButton style={styles.button} color={COLORS.red} rippleDuration={600}
+                                              rippleOpacity={0.54} titleColor={COLORS.white} title='Delete Deck'
+                                              onPress={() => this._deleteDeck(this.props.deck)}/>
+                        </View>
+                    </View> :
+                    null}
             </View>
         );
     }
